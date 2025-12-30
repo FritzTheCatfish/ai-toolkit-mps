@@ -424,7 +424,11 @@ class CoreOptimiser(torch.optim.Optimizer):
                 x0_dot /= x0_minus_l1_norm
             else:
                 _, _, beta3 = self.get_betas(group)
-                running_d_denom.add_(state['s'].mul_(beta3).add_(sliced_grad, alpha=d_update).abs().sum())
+                # MPS fix for add_alpha_strided_cast_bfloat_float
+                if state['s'].dtype != sliced_grad.dtype:
+                    running_d_denom.add_(state['s'].mul_(beta3).add_(sliced_grad.to(state['s'].dtype), alpha=d_update).abs().sum())
+                else:
+                    running_d_denom.add_(state['s'].mul_(beta3).add_(sliced_grad, alpha=d_update).abs().sum())
 
             running_d_numerator.add_(x0_dot, alpha=d_update)
 
