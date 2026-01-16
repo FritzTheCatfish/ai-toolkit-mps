@@ -221,6 +221,17 @@ Requirements:
 - git
 
 
+MacOS:
+```bash
+git clone https://github.com/ostris/ai-toolkit.git
+cd ai-toolkit
+python3 -m venv venv
+source venv/bin/activate
+# install torch first
+pip3 install --no-cache-dir torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1
+pip3 install -r requirements.txt
+```
+
 Linux:
 ```bash
 git clone https://github.com/ostris/ai-toolkit.git
