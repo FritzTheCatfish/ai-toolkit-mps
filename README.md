@@ -217,6 +217,7 @@ _Last updated: 2025-12-17 22:19 UTC_
 Requirements:
 - python = 3.12
 - pip = 25.0
+- nodejs = 22
 - GPU with enough ram to do what you need
 - python venv
 - git
